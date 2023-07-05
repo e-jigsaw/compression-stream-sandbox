@@ -12,13 +12,13 @@ document.getElementById("file")?.addEventListener("change", (ev: Event) => {
         const data = ctx.getImageData(0, 0, 1200, 666);
         const blob1 = new Blob([data.data]);
         const stream = blob1.stream();
-        const compStream = stream.pipeThrough(new CompressionStream("gzip"));
+        const compStream = stream.pipeThrough(new CompressionStream("deflate"));
         const res = new Response(compStream);
         const blob2 = await res.blob();
         const url1 = URL.createObjectURL(blob2);
         const a = document.getElementById("link") as HTMLAnchorElement;
         a.href = url1;
-        a.download = "comp.gzip";
+        a.download = "comp.def";
         a.click();
       }
     };
